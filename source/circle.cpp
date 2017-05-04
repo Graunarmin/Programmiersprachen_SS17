@@ -11,9 +11,14 @@ Circle::Circle():
 //initialisiert Kreis mit Radius und Mittelpunkt
 Circle::Circle(float radius, Vec2 const& center):
 	radius_{radius},
-	center_{center} {}
+	center_{center}{}
 
-//Methodens
+Circle::Circle(float radius, Vec2 const& center, Color const& clr):
+	radius_{radius},
+	center_{center},
+	clr_{clr} {}
+
+//Methoden
 float Circle::getRadius() const{
 	return this -> radius_;
 }

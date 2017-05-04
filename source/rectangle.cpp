@@ -11,6 +11,11 @@ Rectangle::Rectangle(Vec2 const& min, Vec2 const& max):
 	min_{min},
 	max_{max} {}
 
+Rectangle::Rectangle(Vec2 const& min, Vec2 const& max, Color const& clr):
+	min_{min},
+	max_{max},
+	clr_{clr} {}
+
 
 //Methoden
 Vec2 const& Rectangle::getMin() const{
@@ -22,6 +27,6 @@ Vec2 const& Rectangle::getMax() const{
 }
 
 float Rectangle::circumference() const{
-	return 2*(std::abs(std::abs(this -> max_.x_) - std::abs(this -> min_.x_))+std::abs(std::abs(this -> max_.y_) - std::abs(this -> min_.y_)));
+	return 2 * (std::abs(std::abs(this -> max_.x_) - std::abs(this -> min_.x_))+ std::abs(std::abs(this -> max_.y_) - std::abs(this -> min_.y_)));
 }
 
