@@ -393,6 +393,19 @@ REQUIRE (c2.getCenter().x_ == -4.8f);
 REQUIRE (c2.getCenter().y_ == 0.0f);
 }
 
+//Umfang
+TEST_CASE (" circle_circumference ", "[circle_circumference]")
+{
+
+Circle c1{2.7f, Vec2{1.2f, -3.5}};
+float c = c1.circumference();
+Circle c2{8.5f, Vec2{-4.8f, 0.0f}};
+
+REQUIRE (c == Approx(16.96460f));
+REQUIRE (c2.circumference() == Approx(53.40707f));
+}
+
+
 //Tests for rectangle
 //Konstruktoren
 TEST_CASE (" default_rectangle_Constr ", "[default_rectangle_Constr]")
@@ -440,6 +453,18 @@ REQUIRE (t.x_ == 4.4f);
 REQUIRE (t.y_ == 7.9f);
 REQUIRE (rect2.getMax().x_ == 3.7f);
 REQUIRE (rect2.getMax().y_ == 0.0f);
+}
+
+//Umfang
+TEST_CASE (" rectangle_circumference ", "[rectangle_circumference]")
+{
+
+Rectangle rect1{Vec2{2.2f, 3.4f}, Vec2{4.4f, 7.9f}};
+float c = rect1.circumference();
+Rectangle rect2{Vec2{0.0f, -3.4f}, Vec2{3.7f, 0.0f}};
+
+REQUIRE (c == 13.4f);
+REQUIRE (rect2.circumference() == Approx(14.2f));
 }
 
 
