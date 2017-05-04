@@ -6,7 +6,8 @@ add_executable(example
 vec2.cpp
 mat2.cpp
 circle.cpp
-rectangle.cpp)
+rectangle.cpp
+color.cpp)
 target_link_libraries(example
   glfw
   ${GLFW_LIBRARIES}
@@ -20,7 +21,8 @@ add_executable(tests
 vec2.cpp
 mat2.cpp
 circle.cpp
-rectangle.cpp)
+rectangle.cpp
+color.cpp)
 target_link_libraries(tests
   ${GLFW_LIBRARIES})
 
