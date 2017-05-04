@@ -2,6 +2,8 @@
 #include <catch.hpp>
 #include "vec2.hpp"
 #include "mat2.hpp"
+#include "circle.hpp"
+#include "rectangle.hpp"
 
 //Vector Tests
 
@@ -345,6 +347,101 @@ REQUIRE (mRot3.x2_ == Approx(0.59847f));
 REQUIRE (mRot3.y1_ == Approx(-0.59847f));
 REQUIRE (mRot3.y2_ == Approx(-0.80114f));
 }
+
+//Tests for Circle
+//Konstruktortests
+TEST_CASE (" default_circle_Constr ", "[default_circle_Constr]")
+{
+Circle identCircle{};
+
+REQUIRE (identCircle.radius_ == 1.0f);
+REQUIRE (identCircle.center_.x_ == 0.0f);
+REQUIRE (identCircle.center_.y_ == 0.0f);
+}
+
+TEST_CASE (" circle_Constr ", "[circle_Constr]")
+{
+Circle circle{2.7f, Vec2{1.2f, -3.5}};
+
+REQUIRE (circle.radius_ == 2.7f);
+REQUIRE (circle.center_.x_ == 1.2f);
+REQUIRE (circle.center_.y_ == -3.5f);
+}
+
+//getter
+TEST_CASE (" get_Radius ", "[get_Radius]")
+{
+
+Circle c1{2.7f, Vec2{1.2f, -3.5}};
+float t = c1.getRadius();
+Circle c2{8.5f, Vec2{4.8f, 5.5}};
+
+REQUIRE (t == 2.7f);
+REQUIRE (c2.getRadius() == 8.5f);
+}
+
+TEST_CASE (" get_Center ", "[get_Center]")
+{
+
+Circle c1{2.7f, Vec2{1.2f, -3.5}};
+Vec2 c = c1.getCenter();
+Circle c2{8.5f, Vec2{-4.8f, 0.0f}};
+
+REQUIRE (c.x_ == 1.2f);
+REQUIRE (c.y_ == -3.5f);
+REQUIRE (c2.getCenter().x_ == -4.8f);
+REQUIRE (c2.getCenter().y_ == 0.0f);
+}
+
+//Tests for rectangle
+//Konstruktoren
+TEST_CASE (" default_rectangle_Constr ", "[default_rectangle_Constr]")
+{
+Rectangle identRect{};
+
+REQUIRE (identRect.min_.x_ == 0.0f);
+REQUIRE (identRect.min_.y_ == 0.0f);
+REQUIRE (identRect.max_.x_ == 1.0f);
+REQUIRE (identRect.max_.y_ == 1.0f);
+}
+
+TEST_CASE (" rectangle_Constr ", "[rectangle_Constr]")
+{
+Rectangle rect{Vec2{2.2f, 3.4f}, Vec2{4.4f, 7.9f}};
+
+REQUIRE (rect.min_.x_ == 2.2f);
+REQUIRE (rect.min_.y_ == 3.4f);
+REQUIRE (rect.max_.x_ == 4.4f);
+REQUIRE (rect.max_.y_ == 7.9f);
+}
+
+//getter
+TEST_CASE (" get_min ", "[get_min]")
+{
+
+Rectangle rect1{Vec2{2.2f, 3.4f}, Vec2{4.4f, 7.9f}};
+Vec2 t = rect1.getMin();
+Rectangle rect2{Vec2{0.0f, -3.4f}, Vec2{3.7f, 0.0f}};
+
+REQUIRE (t.x_ == 2.2f);
+REQUIRE (t.y_ == 3.4f);
+REQUIRE (rect2.getMin().x_ == 0.0f);
+REQUIRE (rect2.getMin().y_ == -3.4f);
+}
+
+TEST_CASE (" get_max ", "[get_max]")
+{
+
+Rectangle rect1{Vec2{2.2f, 3.4f}, Vec2{4.4f, 7.9f}};
+Vec2 t = rect1.getMax();
+Rectangle rect2{Vec2{0.0f, -3.4f}, Vec2{3.7f, 0.0f}};
+
+REQUIRE (t.x_ == 4.4f);
+REQUIRE (t.y_ == 7.9f);
+REQUIRE (rect2.getMax().x_ == 3.7f);
+REQUIRE (rect2.getMax().y_ == 0.0f);
+}
+
 
 
 int main(int argc, char *argv[]){
