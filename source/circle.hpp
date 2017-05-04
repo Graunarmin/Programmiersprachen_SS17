@@ -17,6 +17,9 @@ public:
 	float getRadius() const;
 	Vec2 const& getCenter() const;
 
+	//Umfang
+	float circumference() const; //const, weil der Kreis nicht veraendert wird
+
 };
 
 

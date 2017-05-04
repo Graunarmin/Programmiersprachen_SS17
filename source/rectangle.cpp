@@ -21,3 +21,7 @@ Vec2 const& Rectangle::getMax() const{
 	return this -> max_;
 }
 
+float Rectangle::circumference() const{
+	return 2*(std::abs(std::abs(this -> max_.x_) - std::abs(this -> min_.x_))+std::abs(std::abs(this -> max_.y_) - std::abs(this -> min_.y_)));
+}
+

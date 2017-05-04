@@ -1,5 +1,6 @@
 #include "circle.hpp"
 #include "vec2.hpp"
+#include <cmath>
 
 //Konstruktoren
 //initialisiert Einheitskreis
@@ -12,8 +13,7 @@ Circle::Circle(float radius, Vec2 const& center):
 	radius_{radius},
 	center_{center} {}
 
-//Methoden
-
+//Methodens
 float Circle::getRadius() const{
 	return this -> radius_;
 }
@@ -22,6 +22,8 @@ Vec2 const& Circle::getCenter() const{
 	return this -> center_;
 }
 
-
+float Circle::circumference() const{
+	return 2 * M_PI * this -> radius_;
+}
 
 
