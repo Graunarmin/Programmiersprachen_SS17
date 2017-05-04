@@ -1,5 +1,6 @@
 # ifndef MAT2_HPP
 # define MAT2_HPP
+#include "vec2.hpp"
 
 // Mat2 definition
 struct Mat2{
@@ -17,8 +18,19 @@ struct Mat2{
 
 	Mat2& operator *= (Mat2 const& m);
 
+	float det () const ;
+
 };
 
 Mat2 const operator *(Mat2 const& m1 , Mat2 const& m2);
+
+Vec2 const operator *(Mat2 const& m, Vec2 const& v);
+Vec2 const operator *(Vec2 const& v, Mat2 const& m);
+
+Mat2 const inverse (Mat2 const& m);
+
+Mat2 const transpose (Mat2 const& m);
+
+Mat2 const make_rotation_mat2 (float phi);
 
 # endif //MAT2_HPP
