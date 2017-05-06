@@ -43,8 +43,27 @@ void Circle::draw(Window const& window, Color const& clr)const{
 		Vec2 startingPoint{(make_rotation_mat2 ((phi * 2 * M_PI)/360) * Vec2{getRadius(),0}) + Vec2{getCenter()}};
 		Vec2 endPoint{(make_rotation_mat2 (((phi+1) * 2 * M_PI)/360) * Vec2{getRadius(),0}) + Vec2{getCenter()}};
 		window.draw_line(startingPoint.x_, startingPoint.y_, endPoint.x_, endPoint.y_, clr.r_, clr.g_, clr.b_);
-		//clr hier ihne _, sonst bezieht es sich auf die Farben des urspr. Objekts!
+		//clr hier ohne _, sonst bezieht es sich auf die Farben des urspr. Objekts!
 	}
 }
+
+bool Circle::is_inside(Vec2 const& v){
+	return sqrt(pow((getCenter().x_ - v.x_),2) + pow((getCenter().y_ - v.y_),2)) <= getRadius();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

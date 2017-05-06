@@ -30,6 +30,8 @@ public:
 	void draw(Window const& window)const; 
 	void draw(Window const& window, Color const& clr)const;
 
+	bool is_inside(Vec2 const& v);
+
 };
 
 

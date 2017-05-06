@@ -48,3 +48,20 @@ void Rectangle::draw(Window const& window, Color const& clr)const{
 	window.draw_line(max_.x_, min_.y_, min_.x_, min_.y_, clr.r_, clr.g_, clr.b_);
 }
 
+bool Rectangle::is_inside(Vec2 const& v){
+	return(v.x_ <= getMax().x_ && v.x_ >= getMin().x_ && v.y_<= getMax().y_ && v.y_ >= getMin().y_);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

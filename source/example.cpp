@@ -4,6 +4,7 @@
 #include <cmath>
 #include "rectangle.hpp"
 #include "circle.hpp"
+#include <vector> 
 
 
 
@@ -29,13 +30,23 @@ int main(int argc, char* argv[])
     float x3{400 + 380 * std::sin(t-10.f)};
     float y3{400 + 380 * std::cos(t-10.f)};
 
+    //Vektoren zum speichern initialisieren
+    std::vector<Circle> vC;
+    std::vector<Rectangle> vR;
+
     //erstellen der Objekte
-    Rectangle rect1{Vec2{10.0f, 25.0f}, Vec2{45.0f, 78.0f}, Color{}};
-    Rectangle rect2{Vec2{-10.0f, 45.50f}, Vec2{87.3f, 100.3}, Color{}};
+    Rectangle rect1{Vec2{66.09f, 81.0f}, Vec2{273.0f, 302.0f}, Color{}};
+    vR.push_back(rect1);
+    Rectangle rect2{Vec2{-10.0f, 45.50f}, Vec2{87.3f, 100.3}, Color{1.0f, 1.0f, 1.0f}};
+    vR.push_back(rect2);
     Rectangle rect3{Vec2{34.0f, 500.7f}, Vec2{98.0f, 720.f}, Color{}};
+    vR.push_back(rect3);
 
     Circle c1{25.0f, Vec2{400.0f, 200.0f}, Color{}};
+    vC.push_back(c1);
     Circle c2{40.5f, Vec2{450.0f, 100.0f}, Color{}};
+    vC.push_back(c2);
+    vC.push_back(Circle{30.0f, Vec2{290.0f, 250.0f}, Color{}});
     
     win.draw_point(x1, y1,
         1.0f, 0.0f, 0.0f);
@@ -62,8 +73,24 @@ int main(int argc, char* argv[])
     rect1.draw(win);
     rect2.draw(win);
     rect3.draw(win, Color{0.0f, 1.0f, 0.0f});
+
+    //blau, wenn Zeiger drin
+    for (int i = 0; i < vR.size(); ++i){
+    	if (vR[i].is_inside(Vec2{(float)win.mouse_position().first, (float)win.mouse_position().second})){
+    	vR[i].draw(win, Color{0.0f, 0.0f, 1.0f});
+    	}
+    }
+
     c1.draw(win);
     c2.draw(win, Color{0.0f, 1.0f, 1.0f});
+    vC[2].draw(win);
+
+    for (int i = 0; i < vC.size(); ++i){
+    	if (vC[i].is_inside(Vec2{(float)win.mouse_position().first, (float)win.mouse_position().second})){
+    	vC[i].draw(win, Color{0.0f, 0.0f, 1.0f});
+    	}
+    }
+ 
 
     win.update();
   }

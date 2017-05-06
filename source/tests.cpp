@@ -455,6 +455,19 @@ REQUIRE (c == Approx(16.96460f));
 REQUIRE (c2.circumference() == Approx(53.40707f));
 }
 
+//is_inside 
+TEST_CASE (" circle_is_inside ", "[circle_is_inside]")
+{
+
+Circle c1{3.0f, Vec2{6.8f, 10.9}, Color{}};
+
+bool i = c1.is_inside(Vec2{6.0f, 10.0f});
+
+REQUIRE (i == true);
+REQUIRE (c1.is_inside(Vec2{1.0f, 0.3f}) == false);
+}
+
+
 
 //Tests for rectangle
 //Konstruktoren
@@ -536,6 +549,18 @@ Rectangle rect2{Vec2{0.0f, -3.4f}, Vec2{3.7f, 0.0f}, Color{}};
 
 REQUIRE (c == 13.4f);
 REQUIRE (rect2.circumference() == Approx(14.2f));
+}
+
+//is_inside 
+TEST_CASE (" rectangle_is_inside ", "[rectangle_is_inside]")
+{
+
+Rectangle rect1{Vec2{2.2f, 10.7f}, Vec2{8.9f, 20.6f}, Color{}};
+
+bool i = rect1.is_inside(Vec2{4.4f, 12.5f});
+
+REQUIRE (i == true);
+REQUIRE (rect1.is_inside(Vec2{1.0f, 0.3f}) == false);
 }
 
 
