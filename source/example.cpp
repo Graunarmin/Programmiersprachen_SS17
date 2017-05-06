@@ -32,8 +32,10 @@ int main(int argc, char* argv[])
     //erstellen der Objekte
     Rectangle rect1{Vec2{10.0f, 25.0f}, Vec2{45.0f, 78.0f}, Color{}};
     Rectangle rect2{Vec2{-10.0f, 45.50f}, Vec2{87.3f, 100.3}, Color{}};
+    Rectangle rect3{Vec2{34.0f, 500.7f}, Vec2{98.0f, 720.f}, Color{}};
 
     Circle c1{25.0f, Vec2{400.0f, 200.0f}, Color{}};
+    Circle c2{40.5f, Vec2{450.0f, 100.0f}, Color{}};
     
     win.draw_point(x1, y1,
         1.0f, 0.0f, 0.0f);
@@ -59,7 +61,9 @@ int main(int argc, char* argv[])
     //Zeichnen
     rect1.draw(win);
     rect2.draw(win);
+    rect3.draw(win, Color{0.0f, 1.0f, 0.0f});
     c1.draw(win);
+    c2.draw(win, Color{0.0f, 1.0f, 1.0f});
 
     win.update();
   }
