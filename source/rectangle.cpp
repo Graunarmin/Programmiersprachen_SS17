@@ -1,15 +1,15 @@
 #include "rectangle.hpp"
-#include "vec2.hpp"
 
 
 //Konstruktoren
 Rectangle::Rectangle():
 	min_{0.0f, 0.0f},
-	max_{1.0f, 1.0f} {}
+	max_{1.0f, 1.0f},
+	clr_{0.0} {}
 
-Rectangle::Rectangle(Vec2 const& min, Vec2 const& max):
-	min_{min},
-	max_{max} {}
+// Rectangle::Rectangle(Vec2 const& min, Vec2 const& max):
+// 	min_{min},
+// 	max_{max} {}
 
 Rectangle::Rectangle(Vec2 const& min, Vec2 const& max, Color const& clr):
 	min_{min},
@@ -24,6 +24,17 @@ Vec2 const& Rectangle::getMin() const{
 
 Vec2 const& Rectangle::getMax() const{
 	return this -> max_;
+}
+
+Color const& Rectangle::getColor() const{
+	return this -> clr_;
+}
+
+void Rectangle::draw(Window const& window)const{
+	window.draw_line(min_.x_, min_.y_, min_.x_, max_.y_, clr_.r_, clr_.g_, clr_.b_);
+	window.draw_line(min_.x_, max_.y_, max_.x_, max_.y_, clr_.r_, clr_.g_, clr_.b_);
+	window.draw_line(max_.x_, max_.y_, max_.x_, min_.y_, clr_.r_, clr_.g_, clr_.b_);
+	window.draw_line(max_.x_, min_.y_, min_.x_, min_.y_, clr_.r_, clr_.g_, clr_.b_);
 }
 
 float Rectangle::circumference() const{
