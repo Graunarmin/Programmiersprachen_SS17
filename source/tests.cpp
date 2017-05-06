@@ -348,6 +348,35 @@ REQUIRE (mRot3.y1_ == Approx(-0.59847f));
 REQUIRE (mRot3.y2_ == Approx(-0.80114f));
 }
 
+//Color Test
+TEST_CASE (" default_color_Constr ", "[default_color_Constr]")
+{
+Color black{};
+
+REQUIRE (black.r_ == 0.0f);
+REQUIRE (black.g_ == 0.0f);
+REQUIRE (black.b_ == 0.0f);
+}
+
+TEST_CASE (" color_Constr_one ", "[color_Constr_one]")
+{
+Color weirdColor{1.0f};
+
+REQUIRE (weirdColor.r_ == 1.0f);
+REQUIRE (weirdColor.g_ == 1.0f);
+REQUIRE (weirdColor.b_ == 1.0f);
+}
+
+TEST_CASE (" color_Constr ", "[color_Constr]")
+{
+Color anyColor{1.0f, 0.0f, 1.0f};
+
+REQUIRE (anyColor.r_ == 1.0f);
+REQUIRE (anyColor.g_ == 0.0f);
+REQUIRE (anyColor.b_ == 1.0f);
+}
+
+
 //Tests for Circle
 //Konstruktortests
 TEST_CASE (" default_circle_Constr ", "[default_circle_Constr]")
@@ -357,24 +386,30 @@ Circle identCircle{};
 REQUIRE (identCircle.radius_ == 1.0f);
 REQUIRE (identCircle.center_.x_ == 0.0f);
 REQUIRE (identCircle.center_.y_ == 0.0f);
+REQUIRE (identCircle.clr_.r_ == 0.0f);
+REQUIRE (identCircle.clr_.g_ == 0.0f);
+REQUIRE (identCircle.clr_.b_ == 0.0f);
 }
 
 TEST_CASE (" circle_Constr ", "[circle_Constr]")
 {
-Circle circle{2.7f, Vec2{1.2f, -3.5}};
+Circle circle{2.7f, Vec2{1.2f, -3.5}, Color{1.0f}};
 
 REQUIRE (circle.radius_ == 2.7f);
 REQUIRE (circle.center_.x_ == 1.2f);
 REQUIRE (circle.center_.y_ == -3.5f);
+REQUIRE (circle.clr_.r_ == 1.0f);
+REQUIRE (circle.clr_.g_ == 1.0f);
+REQUIRE (circle.clr_.b_ == 1.0f);
 }
 
 //getter
 TEST_CASE (" get_Radius ", "[get_Radius]")
 {
 
-Circle c1{2.7f, Vec2{1.2f, -3.5}};
+Circle c1{2.7f, Vec2{1.2f, -3.5}, Color{}};
 float t = c1.getRadius();
-Circle c2{8.5f, Vec2{4.8f, 5.5}};
+Circle c2{8.5f, Vec2{4.8f, 5.5},Color{}};
 
 REQUIRE (t == 2.7f);
 REQUIRE (c2.getRadius() == 8.5f);
@@ -383,9 +418,9 @@ REQUIRE (c2.getRadius() == 8.5f);
 TEST_CASE (" get_Center ", "[get_Center]")
 {
 
-Circle c1{2.7f, Vec2{1.2f, -3.5}};
+Circle c1{2.7f, Vec2{1.2f, -3.5}, Color{}};
 Vec2 c = c1.getCenter();
-Circle c2{8.5f, Vec2{-4.8f, 0.0f}};
+Circle c2{8.5f, Vec2{-4.8f, 0.0f}, Color{}};
 
 REQUIRE (c.x_ == 1.2f);
 REQUIRE (c.y_ == -3.5f);
@@ -393,13 +428,28 @@ REQUIRE (c2.getCenter().x_ == -4.8f);
 REQUIRE (c2.getCenter().y_ == 0.0f);
 }
 
+TEST_CASE (" get_Circ_Color ", "[get_Circ_Color]")
+{
+
+Circle c1{2.7f, Vec2{1.2f, -3.5}, Color{}};
+Color c = c1.getColor();
+Circle c2{8.5f, Vec2{-4.8f, 0.0f}, Color{0.0f, 1.0f, 0.0f}};
+
+REQUIRE (c1.clr_.r_ == 0.0f);
+REQUIRE (c1.clr_.g_ == 0.0f);
+REQUIRE (c1.clr_.b_ == 0.0f);
+REQUIRE (c2.getColor().r_ == 0.0f);
+REQUIRE (c2.getColor().g_ == 1.0f);
+REQUIRE (c2.getColor().b_ == 0.0f);
+}
+
 //Umfang
 TEST_CASE (" circle_circumference ", "[circle_circumference]")
 {
 
-Circle c1{2.7f, Vec2{1.2f, -3.5}};
+Circle c1{2.7f, Vec2{1.2f, -3.5}, Color{}};
 float c = c1.circumference();
-Circle c2{8.5f, Vec2{-4.8f, 0.0f}};
+Circle c2{8.5f, Vec2{-4.8f, 0.0f}, Color{}};
 
 REQUIRE (c == Approx(16.96460f));
 REQUIRE (c2.circumference() == Approx(53.40707f));
@@ -416,25 +466,31 @@ REQUIRE (identRect.min_.x_ == 0.0f);
 REQUIRE (identRect.min_.y_ == 0.0f);
 REQUIRE (identRect.max_.x_ == 1.0f);
 REQUIRE (identRect.max_.y_ == 1.0f);
+REQUIRE (identRect.clr_.r_ == 0.0f);
+REQUIRE (identRect.clr_.g_ == 0.0f);
+REQUIRE (identRect.clr_.b_ == 0.0f);
 }
 
 TEST_CASE (" rectangle_Constr ", "[rectangle_Constr]")
 {
-Rectangle rect{Vec2{2.2f, 3.4f}, Vec2{4.4f, 7.9f}};
+Rectangle rect{Vec2{2.2f, 3.4f}, Vec2{4.4f, 7.9f}, Color{}};
 
 REQUIRE (rect.min_.x_ == 2.2f);
 REQUIRE (rect.min_.y_ == 3.4f);
 REQUIRE (rect.max_.x_ == 4.4f);
 REQUIRE (rect.max_.y_ == 7.9f);
+REQUIRE (rect.clr_.r_ == 0.0f);
+REQUIRE (rect.clr_.g_ == 0.0f);
+REQUIRE (rect.clr_.b_ == 0.0f);
 }
 
 //getter
 TEST_CASE (" get_min ", "[get_min]")
 {
 
-Rectangle rect1{Vec2{2.2f, 3.4f}, Vec2{4.4f, 7.9f}};
+Rectangle rect1{Vec2{2.2f, 3.4f}, Vec2{4.4f, 7.9f}, Color{1.0f, 0.0f,1.0f}};
 Vec2 t = rect1.getMin();
-Rectangle rect2{Vec2{0.0f, -3.4f}, Vec2{3.7f, 0.0f}};
+Rectangle rect2{Vec2{0.0f, -3.4f}, Vec2{3.7f, 0.0f}, Color{}};
 
 REQUIRE (t.x_ == 2.2f);
 REQUIRE (t.y_ == 3.4f);
@@ -445,9 +501,9 @@ REQUIRE (rect2.getMin().y_ == -3.4f);
 TEST_CASE (" get_max ", "[get_max]")
 {
 
-Rectangle rect1{Vec2{2.2f, 3.4f}, Vec2{4.4f, 7.9f}};
+Rectangle rect1{Vec2{2.2f, 3.4f}, Vec2{4.4f, 7.9f}, Color{}};
 Vec2 t = rect1.getMax();
-Rectangle rect2{Vec2{0.0f, -3.4f}, Vec2{3.7f, 0.0f}};
+Rectangle rect2{Vec2{0.0f, -3.4f}, Vec2{3.7f, 0.0f}, Color{}};
 
 REQUIRE (t.x_ == 4.4f);
 REQUIRE (t.y_ == 7.9f);
@@ -455,13 +511,28 @@ REQUIRE (rect2.getMax().x_ == 3.7f);
 REQUIRE (rect2.getMax().y_ == 0.0f);
 }
 
+TEST_CASE (" get_Rect_Color ", "[get_Rect_Color]")
+{
+
+Rectangle r1{Vec2{2.2f, 3.4f}, Vec2{4.4f, 7.9f}, Color{}};
+Color c = r1.getColor();
+Rectangle r2{Vec2{0.0f, -3.4f}, Vec2{3.7f, 0.0f}, Color{0.0f,1.0f,0.0f}};
+
+REQUIRE (r1.clr_.r_ == 0.0f);
+REQUIRE (r1.clr_.g_ == 0.0f);
+REQUIRE (r1.clr_.b_ == 0.0f);
+REQUIRE (r2.getColor().r_ == 0.0f);
+REQUIRE (r2.getColor().g_ == 1.0f);
+REQUIRE (r2.getColor().b_ == 0.0f);
+}
+
 //Umfang
 TEST_CASE (" rectangle_circumference ", "[rectangle_circumference]")
 {
 
-Rectangle rect1{Vec2{2.2f, 3.4f}, Vec2{4.4f, 7.9f}};
+Rectangle rect1{Vec2{2.2f, 3.4f}, Vec2{4.4f, 7.9f}, Color{}};
 float c = rect1.circumference();
-Rectangle rect2{Vec2{0.0f, -3.4f}, Vec2{3.7f, 0.0f}};
+Rectangle rect2{Vec2{0.0f, -3.4f}, Vec2{3.7f, 0.0f}, Color{}};
 
 REQUIRE (c == 13.4f);
 REQUIRE (rect2.circumference() == Approx(14.2f));

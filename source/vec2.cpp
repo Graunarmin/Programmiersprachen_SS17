@@ -17,13 +17,13 @@ Vec2::Vec2(Vec2 const& v):
 
 //Operation overloading
 
-Vec2& Vec2::operator += (Vec2 const & v){
+Vec2& Vec2::operator += (Vec2 const& v){
 	this -> x_ += v.x_;
 	this -> y_ += v.y_;
 	return *this; //this wird durch das * zum referenzierten Element
 }
 
-Vec2& Vec2::operator -= (Vec2 const & v){
+Vec2& Vec2::operator -= (Vec2 const& v){
 	this -> x_ -= v.x_;
 	this -> y_ -= v.y_;
 	return *this;

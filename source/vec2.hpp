@@ -3,7 +3,7 @@
 
 // Vec2 class definition
 struct Vec2{
-	// TODO Constructors	
+		
 	float x_;
 	float y_;
 
