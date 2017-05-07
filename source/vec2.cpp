@@ -15,7 +15,7 @@ Vec2::Vec2(Vec2 const& v):
 	y_{v.y_} {}
 
 
-//Operation overloading
+//Operationen
 
 Vec2& Vec2::operator += (Vec2 const& v){
 	this -> x_ += v.x_;
@@ -57,7 +57,6 @@ Vec2 const operator *(Vec2 const& v, float s){
 Vec2 const operator /(Vec2 const& v, float s){
 	return Vec2{v} /= s;
 }
-
 
 Vec2 const operator *(float s, Vec2 const& v){
 	return Vec2{v} *= s;

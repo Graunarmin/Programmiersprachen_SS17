@@ -7,15 +7,10 @@ Rectangle::Rectangle():
 	max_{1.0f, 1.0f},
 	clr_{0.0} {}
 
-// Rectangle::Rectangle(Vec2 const& min, Vec2 const& max):
-// 	min_{min},
-// 	max_{max} {}
-
 Rectangle::Rectangle(Vec2 const& min, Vec2 const& max, Color const& clr):
 	min_{min},
 	max_{max},
 	clr_{clr} {}
-
 
 //Methoden
 Vec2 const& Rectangle::getMin() const{
@@ -51,17 +46,4 @@ void Rectangle::draw(Window const& window, Color const& clr)const{
 bool Rectangle::is_inside(Vec2 const& v){
 	return(v.x_ <= getMax().x_ && v.x_ >= getMin().x_ && v.y_<= getMax().y_ && v.y_ >= getMin().y_);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 

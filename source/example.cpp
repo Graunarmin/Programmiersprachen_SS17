@@ -35,21 +35,15 @@ int main(int argc, char* argv[])
     std::vector<Rectangle> vR;
 
     //erstellen der Objekte
-    Rectangle rect1{Vec2{66.09f, 81.0f}, Vec2{273.0f, 302.0f}, Color{}};
-    vR.push_back(rect1);
-    Rectangle rect2{Vec2{-10.0f, 45.50f}, Vec2{87.3f, 100.3}, Color{1.0f, 1.0f, 1.0f}};
-    vR.push_back(rect2);
-    Rectangle rect3{Vec2{34.0f, 500.7f}, Vec2{98.0f, 720.f}, Color{}};
-    vR.push_back(rect3);
+    vR.push_back(Rectangle{Vec2{66.09f, 81.0f}, Vec2{273.0f, 302.0f}, Color{}});
+    vR.push_back(Rectangle{Vec2{-10.0f, 45.50f}, Vec2{87.3f, 100.3}, Color{1.0f, 1.0f, 1.0f}});
+    vR.push_back(Rectangle{Vec2{34.0f, 500.7f}, Vec2{98.0f, 720.f}, Color{}});
 
-    Circle c1{25.0f, Vec2{400.0f, 200.0f}, Color{}};
-    vC.push_back(c1);
-    Circle c2{40.5f, Vec2{450.0f, 100.0f}, Color{}};
-    vC.push_back(c2);
+    vC.push_back(Circle{25.0f, Vec2{400.0f, 200.0f}, Color{}});
+    vC.push_back(Circle{40.5f, Vec2{450.0f, 100.0f}, Color{}});
     vC.push_back(Circle{30.0f, Vec2{290.0f, 250.0f}, Color{}});
     
-    win.draw_point(x1, y1,
-        1.0f, 0.0f, 0.0f);
+    win.draw_point(x1, y1, 1.0f, 0.0f, 0.0f);
     win.draw_point(x2, y2, 0.0f, 1.0f, 0.0f);
     win.draw_point(x3, y3, 0.0f, 0.0f, 1.0f);
 
@@ -70,9 +64,9 @@ int main(int argc, char* argv[])
     win.draw_text(10, 5, 35.0f, text);
 
     //Zeichnen
-    rect1.draw(win);
-    rect2.draw(win);
-    rect3.draw(win, Color{0.0f, 1.0f, 0.0f});
+    vR[0].draw(win);
+    vR[1].draw(win);
+    vR[2].draw(win, Color{0.0f, 1.0f, 0.0f});
 
     //blau, wenn Zeiger drin
     for (int i = 0; i < vR.size(); ++i){
@@ -81,8 +75,8 @@ int main(int argc, char* argv[])
     	}
     }
 
-    c1.draw(win);
-    c2.draw(win, Color{0.0f, 1.0f, 1.0f});
+    vC[0].draw(win);
+    vC[1].draw(win, Color{0.0f, 1.0f, 1.0f});
     vC[2].draw(win);
 
     for (int i = 0; i < vC.size(); ++i){

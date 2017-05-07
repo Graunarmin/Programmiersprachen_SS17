@@ -51,19 +51,3 @@ bool Circle::is_inside(Vec2 const& v){
 	return sqrt(pow((getCenter().x_ - v.x_),2) + pow((getCenter().y_ - v.y_),2)) <= getRadius();
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -18,7 +18,7 @@ struct Mat2{
 
 	Mat2& operator *= (Mat2 const& m);
 
-	float det () const ;
+	float det() const ;
 
 };
 
