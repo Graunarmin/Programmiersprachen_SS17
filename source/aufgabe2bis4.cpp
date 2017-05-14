@@ -5,7 +5,7 @@
 # include <iterator> // std :: ostream_iterator <>
 # include <algorithm> // std :: reverse , std :: generate
 # include <set>
-#include <map>
+# include <map>
 
 int main ()
 {
