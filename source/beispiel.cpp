@@ -28,7 +28,7 @@ int main ()
 		std::ostream_iterator <int>(std::cout, "\n"));
 
 	std::generate(std::begin(v0), std::end(v0), std::rand); //Jedes Element von v0 bekommt eine neue Zufallszahl zugewiesen
-	std::copy(v0.rbegin(), v0.rend (), //gibt alle Werte des generierten Vektors auf der Konsole aus
+	std::copy(v0.rbegin(), v0.rend (), //gibt alle Werte des generierten Vektors auf der Konsole aus, aber in umgekehrter Reihenfolge (rbegin)
 		std::ostream_iterator <int>(std::cout, "\n"));
 
 	//Datentyp von v0: Vector
