@@ -26,10 +26,24 @@ TEST_CASE("filter alle vielfachen von drei", "[erase]")
   print(vCircles);
 
   std::sort(vCircles.begin(), vCircles.end());
-  std::cout<< "Und sortiert: \n";
+  std::cout<< "Sortiert: \n";
   print(vCircles);
 
+  std::vector<Circle> vCircles2(10);
+  for(auto& i: vCircles2)
+  {
+    i = Circle{std::rand() % 50, Vec2{std::rand() % 50, std::rand()%50}};
+  }
+
+  std::cout<< "Neue Kreisradien: \n";
+  print(vCircles2);
+
+  std::sort(vCircles2.begin(), vCircles2.end(), [](Circle c1, Circle c2) {return c1 < c2;});
+  std::cout<< "Und sortiert: \n";
+  print(vCircles2);
+
   REQUIRE(std::is_sorted(vCircles.begin(), vCircles.end()));
+  REQUIRE(std::is_sorted(vCircles2.begin(), vCircles2.end()));
 }
 
 
