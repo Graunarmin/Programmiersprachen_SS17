@@ -14,7 +14,7 @@ void print(const std::vector<Circle> &vec)
   }
 }
 
-TEST_CASE("filter alle vielfachen von drei", "[erase]")
+TEST_CASE("Kreise sortieren", "[sort]")
 {
   std::vector<Circle> vCircles(10);
   for(auto& j: vCircles)

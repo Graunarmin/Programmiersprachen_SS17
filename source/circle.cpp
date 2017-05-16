@@ -25,14 +25,14 @@ int Circle::circumference() const{
 }
 
 //Operatoren überladen
-bool Circle::operator <(Circle const& c)const{
+bool Circle::operator <(Circle const& c) const{
 	return radius_ < c.radius_;
 }
 
-bool Circle::operator >(Circle const& c)const{
+bool Circle::operator >(Circle const& c) const{
 	return radius_ > c.radius_;
 }
 
-bool Circle::operator ==(Circle const& c)const{
+bool Circle::operator ==(Circle const& c) const{
 	return radius_ == c.radius_;
 }
