@@ -12,3 +12,13 @@ add_executable(aufgabe7
 
 add_executable(aufgabe9 aufgabe9.cpp)
 
+#Build aufgabe12
+add_executable(aufgabe12 
+	aufgabe12.cpp
+	vec2.cpp
+	circle.cpp)
+
+
+
+
+
