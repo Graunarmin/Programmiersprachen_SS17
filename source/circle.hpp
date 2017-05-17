@@ -22,9 +22,9 @@ public:
 	//Umfang
 	int circumference() const; //const, weil der Kreis nicht veraendert wird
 
-	bool operator <(Circle const& c)const;
-	bool operator >(Circle const& c)const;
-	bool operator ==(Circle const& c)const;
+	bool operator <(Circle const& c) const;
+	bool operator >(Circle const& c) const;
+	bool operator ==(Circle const& c) const;
 
 
 };
