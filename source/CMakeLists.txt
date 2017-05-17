@@ -20,6 +20,12 @@ add_executable(aufgabe12
 	vec2.cpp
 	circle.cpp)
 
+#Build aufgabe13
+add_executable(aufgabe13 
+	aufgabe13.cpp
+	vec2.cpp
+	circle.cpp)
+
 
 
 
