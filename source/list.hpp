@@ -1,8 +1,9 @@
 # ifndef BUW_LIST_HPP
 # define BUW_LIST_HPP
 # include <cstddef>
+# include <utility>
 
-// List .hpp
+// List.hpp
 
 template <typename T>
 struct List;
@@ -10,13 +11,22 @@ struct List;
 template <typename T>
 struct ListNode
 {
-  ListNode() : m_value(), m_prev(nullptr), m_next(nullptr) {}
-  ListNode (T const& v, ListNode* prev , ListNode* next)
-    : m_value(v), m_prev(prev), m_next(next)
-  {}
+  //Default Constructor
+  ListNode():
+    m_value(),
+    m_prev(nullptr), //prev pointer auf nullptr
+    m_next(nullptr) {} //next pointer auf nullptr
+
+  //Constructor
+  ListNode (T const& v, ListNode* prev , ListNode* next):
+    m_value(v),
+    m_prev(prev),
+    m_next(next) {}
+
+  //Membervariablen
   T m_value;
-  ListNode* m_prev;
-  ListNode* m_next;
+  ListNode* m_prev; //Zeiger auf prev
+  ListNode* m_next; //Zeiger auf next
 };
 
 template <typename T>
@@ -54,10 +64,24 @@ public:
   friend class ListConstIterator <T>;
   // not implemented yet
 
+  //Default Constructor
+  List():
+    m_size{0},
+    m_first{nullptr},
+    m_last{nullptr} {}
+
+  bool empty() const{
+    return m_size == 0;
+  }
+
+  std::size_t size() const{
+    return m_size;
+  }
+
 private:
   std::size_t m_size = 0;
-  ListNode <T>* m_first = nullptr;
-  ListNode <T>* m_last = nullptr;
+  ListNode<T>* m_first = nullptr;
+  ListNode<T>* m_last = nullptr;
 };
 
 # endif // # define BUW_LIST_HPP
