@@ -26,6 +26,8 @@ TEST_CASE ("add with push_front, delete with pop_front ", "[modifiers]")
   REQUIRE(list.size() == 1);
   REQUIRE(list.front() == list.back());
 
+  list.pop_front();
+  REQUIRE(list.size() == 0);
 }
 
 TEST_CASE ("add with push_back, delete with pop_back ", "[modifiers]")
@@ -41,6 +43,8 @@ TEST_CASE ("add with push_back, delete with pop_back ", "[modifiers]")
   REQUIRE(list.size() == 1);
   REQUIRE(list.front() == list.back());
 
+  list.pop_back();
+  REQUIRE(list.size() == 0);
 }
 
 TEST_CASE ("should be empty after clearing", "[modifiers]")
@@ -62,6 +66,22 @@ list.push_back(0);
 list.~List();
 
 REQUIRE(list.empty());
+}
+
+TEST_CASE ("should be an empty range after default construction",
+"[iterators]")
+{
+  List <int> list;
+  auto b = list.begin();
+  auto e = list.end();
+  REQUIRE(b == e);
+}
+
+TEST_CASE ("provide acces to the first element with begin", "[iterators]")
+{
+List <int> list ;
+list.push_front(42);
+REQUIRE (42 == *list.begin());
 }
 
 int main(int argc, char* argv[]){

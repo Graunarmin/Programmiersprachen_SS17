@@ -50,25 +50,63 @@ struct ListIterator
 
   reference operator*() const {
     /*Dereferenzierung, Übergang von Zeiger auf Objekt;
-    *also gib den Inhalt des Knotens zurück, auf den
+    *gib also den Inhalt des Knotens zurück, auf den
     *der Iterator gerade zeigt*/
-    return (*m_node).m_value;
+    return m_node->m_value;
   }
   pointer operator->() const {
     //Kurzschreibweise für *
-    return m_node -> m_value
+    return &(m_node->m_value);
   } // not implemented yet
-  Self& operator++() {} //setzt Iterator eins weiter
-  Self operator++(int) {} //setzt Iterator auf Position int
-  bool operator==(const Self& x) const {} //vgl Iterator mit anderem Zeiger
-  bool operator!=(const Self& x) const {} //vgl Iterator mit anderem Zeiger
-  Self next() const //gibt den nächsten Knoten zurücke, falls es einen gibt
+
+  Self& operator++() {
+    //Preincrement
+    if(m_node->m_next == nullptr)
+    {
+      std::cout << "This the last node, you can't go any further!";
+      return 0;
+    }
+    else
+    {
+      m_node = m_node -> m_next;
+    }
+    return m_node;
+
+  } //setzt Iterator eins weiter
+
+  Self operator++(int) {
+    //Postincrement
+    if(m_node->m_next == nullptr)
+    {
+      std::cout << "This the last node, you can't go any further!";
+      return 0;
+    }
+    else
+    {
+      /*auto*/ListIterator old(*this); //Konstruktor!
+      m_node = m_node -> m_next;
+      return old;
+    }
+  }
+
+  bool operator==(const Self& x) const {
+    //vgl Iterator mit anderem Zeiger
+    return m_node == x.m_node;
+  }
+
+  bool operator!=(const Self& x) const {
+    return m_node != x.m_node;
+  }
+
+  Self next() const //gibt Iterator auf den nächsten Knoten zurück, falls es einen gibt
   {
     if (m_node)
       return ListIterator (m_node -> m_next);
     else
       return ListIterator (nullptr);
   }
+
+
 private :
     // The Node the iterator is pointing to
   ListNode <T>* m_node = nullptr;
@@ -118,6 +156,11 @@ public:
 
   T front()
   {
+    if (empty())
+    {
+      std::cout << "Sorry, but this list is empty";
+      return 0;
+    }
     return (*m_first).m_value;
   }
 
@@ -150,15 +193,27 @@ public:
     {
       std::cout << "Sorry, but this list is already empty.\n";
     }
+    if(size() == 1)
+    {
+      m_first = m_last = nullptr;
+      --m_size;
+    }
     else
     {
       (*(*m_first).m_next).m_prev = nullptr;
       m_first = (*m_first).m_next;
+      --m_size;
     }
-    --m_size;
+
   }
 
-  T back(){
+  T back()
+  {
+    if (empty())
+    {
+      std::cout << "Sorry, but this list is empty";
+      return 0;
+    }
     return(*m_last).m_value;
   }
 
@@ -180,24 +235,58 @@ public:
     {
       std::cout << "Sorry, but this list is already empty. \n";
     }
+    if(size() == 1)
+    {
+      m_first = m_last = nullptr;
+      --m_size;
+    }
     else
     {
       (*(*m_last).m_prev).m_next = nullptr;
       m_last = (*m_last).m_prev;
+      --m_size;
     }
-    --m_size;
   }
 
   void clear()
   {
-      m_first = m_last = nullptr;
-      m_size = 0;
+    while(!empty())
+    {
+      pop_front();
+    }
+      // m_first = m_last = nullptr;
+      // m_size = 0;
   }
 
   //Destructor
   ~List()
   {
     clear();
+  }
+
+   ListIterator<T> begin()
+  {
+    if(empty())
+    {
+      return ListIterator<T> {};
+    }
+    else
+    {
+      return ListIterator<T>(m_first);
+    }
+  }
+
+  ListIterator<T> end()
+  {
+    if(empty())
+    {
+      return ListIterator <T>{};
+    }
+    else
+    {
+      return ListIterator<T>(m_last);
+    }
+
   }
 
 
