@@ -55,30 +55,32 @@ struct ListIterator
     return m_node->m_value;
   }
   pointer operator->() const {
-    //Kurzschreibweise für *
+    //gibt pointer auf das Objekt zurück
+    //WIE TESTEN??
     return &(m_node->m_value);
-  } // not implemented yet
+  }
 
   Self& operator++() {
     //Preincrement
-    if(m_node->m_next == nullptr)
-    {
-      std::cout << "This the last node, you can't go any further!";
-      return 0;
-    }
-    else
-    {
+    //erhöht um eins und gibt zurück
+    // if(m_node->m_next == nullptr)
+    // {
+    //   std::cout << "This the last node, you can't go any further!";
+    //   return 0;
+    // }
+    // else
+    // {
       m_node = m_node -> m_next;
-    }
-    return m_node;
-
-  } //setzt Iterator eins weiter
+      return *this;
+    // }
+  }
 
   Self operator++(int) {
     //Postincrement
+    //erhoeht um 1, gibt alten Wert zurück
     if(m_node->m_next == nullptr)
     {
-      std::cout << "This the last node, you can't go any further!";
+      std::cout << "ERROR at Postincrement: \nThis is the last node, you can't go any further! \n";
       return 0;
     }
     else
@@ -286,14 +288,7 @@ public:
     {
       return ListIterator<T>(m_last);
     }
-
   }
-
-
-
-
-
-
 
 private:
   std::size_t m_size = 0;
