@@ -41,6 +41,7 @@ struct ListIterator
 
   friend class List<T>; //heißt: ListIterator kann alle Funktionen der Klasse List benutzen
 
+  //Aufgabe 4.5
   //Constructors
   ListIterator(): // Zeiger, der auf Elemente der Liste zeigt
     m_node{nullptr} {}
@@ -141,22 +142,35 @@ public:
   friend class ListConstIterator <T>;
   // not implemented yet
 
+  //Aufgabe 4.2
   //Default Constructor
   List():
     m_size{0},
     m_first{nullptr},
     m_last{nullptr} {}
 
+  //Aufgabe 4.8
+  //Copy Constructor
   List(List<T> const& list):
-      m_size{0},
-      m_first{nullptr},
-      m_last{nullptr}{
-      for(auto e = list.begin(); e != nullptr; ++e)
-      {
-        push_back(*e);
-      }
-      }
+    m_size{0},
+    m_first{nullptr},
+    m_last{nullptr}{
+    for(auto e = list.begin(); e != nullptr; ++e)
+    {
+      push_back(*e);
+    }
+    }
 
+  //Aufgabe 4.13
+  //Move Constructor
+  List(List<T>&& list):
+    m_size{list.m_size},
+    m_first{list.m_first},
+    m_last{list.m_last}{
+      list.clear();
+    }
+
+  //Aufgabe 4.2
   bool empty() const
   {
     return m_size == 0;
@@ -167,6 +181,7 @@ public:
     return m_size;
   }
 
+  //Aufgabe 4.3
   T front()
   {
     if (empty())
@@ -261,6 +276,7 @@ public:
     }
   }
 
+  //Aufgabe 4.4
   void clear()
   {
     while(!empty())
@@ -277,7 +293,8 @@ public:
     clear();
   }
 
-   ListIterator<T> begin() const
+  //Aufgabe 4.6
+  ListIterator<T> begin() const
   {
     if(empty())
     {
@@ -301,6 +318,7 @@ public:
     }
   }
 
+  //Aufgabe 4.10
   void reverse()
   {
     List<T>temp;
