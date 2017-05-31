@@ -27,8 +27,9 @@ TEST_CASE("Copy Constructor Liste", "[4.8 constructor]")
   list.push_front(2);
   list.push_front(3);
   list.push_front(4);
-  List<int> list3{list};
-  REQUIRE (list2 == list3);
+  List<int> list3{list2};
+  REQUIRE(list2 == list3);
+  REQUIRE(list2 != list);
 }
 
 TEST_CASE ("add with push_front, delete with pop_front ", "[modifiers]")
@@ -201,6 +202,43 @@ TEST_CASE("compare lists", "[4.7]")
   REQUIRE(list != list2);
 }
 
+TEST_CASE("reverse", "[4.10 reverse]")
+{
+  List <int> list;
+  list.push_front(42);
+  list.push_back(3);
+  list.push_back(12);
+  list.reverse();
+  REQUIRE(list.front() == 12);
+  REQUIRE(list.size() == 3);
+
+  List<int> list2;
+  list2.reverse();
+  REQUIRE(list2.begin() == nullptr);
+
+  List<int> list3;
+  list3.push_front(1);
+  list3.reverse();
+  REQUIRE(list3.front() == 1);
+
+}
+
+TEST_CASE("free reverse", "[4.10 reverse]")
+{
+  List <int> list;
+  list.push_front(42);
+  list.push_back(3);
+  list.push_back(12);
+  REQUIRE(reverse(list).front() == 12);
+
+  List<int> list2;
+  reverse(list2);
+  REQUIRE(list2.begin() == nullptr);
+
+  List<int> list3;
+  list3.push_front(1);
+  REQUIRE(reverse(list3).front() == 1);
+}
 
 
 

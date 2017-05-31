@@ -301,6 +301,20 @@ public:
     }
   }
 
+  void reverse()
+  {
+    List<T>temp;
+    for(auto e = begin(); e != nullptr; ++e)
+    {
+        temp.push_back(*e);
+    }
+    clear();
+    for (auto e = temp.begin(); e != nullptr; ++e)
+    {
+      push_front(*e);
+    }
+  }
+
 private:
   std::size_t m_size = 0;
   ListNode<T>* m_first = nullptr;
@@ -347,6 +361,17 @@ bool operator !=(List<T> const& xs, List<T> const& ys)
     return false;
   }
   return true;
+}
+
+template<typename T>
+List<T> reverse(List<T> const& list)
+{
+  List<T>reversedList;
+  for(auto e = list.begin(); e != nullptr; ++e)
+  {
+      reversedList.push_front(*e);
+  }
+  return reversedList;
 }
 
 
