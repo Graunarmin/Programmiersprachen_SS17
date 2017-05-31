@@ -105,7 +105,8 @@ TEST_CASE("Increment_Operators", "[iterators]")
   REQUIRE(*b == 42);
   REQUIRE(*(++b) == 3);
   REQUIRE(*(b++) == 3); //b auf 12, aber gibt alten Werts
-  b++;
+  REQUIRE(*(b++) == 12);
+  REQUIRE(b == nullptr);
 }
 
 TEST_CASE("compare_operator", "[iterators]")
@@ -161,6 +162,23 @@ TEST_CASE("provide acces to the last element with end", "[iterators]")
   list.push_front(42);
   list.push_front(8);
   REQUIRE (42 == *list.end());
+}
+
+TEST_CASE("compare lists", "[4.7]")
+{
+  List <int> list;
+  list.push_front(42);
+  list.push_back(3);
+  list.push_back(12);
+
+  List<int> list2;
+  list2.push_front(42);
+  list2.push_back(3);
+  list2.push_back(12);
+  REQUIRE(list == list2);
+
+  list2.push_back(7);
+  REQUIRE(list != list2);
 }
 
 

@@ -78,17 +78,17 @@ struct ListIterator
   Self operator++(int) {
     //Postincrement
     //erhoeht um 1, gibt alten Wert zurück
-    if(m_node->m_next == nullptr)
-    {
-      std::cout << "ERROR at Postincrement: \nThis is the last node, you can't go any further! \n";
-      return 0;
-    }
-    else
-    {
+    // if(m_node->m_next == nullptr)
+    // {
+    //   std::cout << "ERROR at Postincrement: \nThis is the last node, you can't go any further! \n";
+    //   return 0;
+    // }
+    // else
+    // {
       /*auto*/ListIterator old(*this); //Konstruktor!
       m_node = m_node -> m_next;
       return old;
-    }
+    // }
   }
 
   bool operator==(const Self& x) const {
@@ -123,6 +123,49 @@ public:
 private:
   ListNode <T>* m_node = nullptr;
 };
+
+template<typename T>
+bool operator ==(List<T> const& xs, List<T> const& ys)
+{
+  auto a = xs.begin();
+  auto b = ys.begin();
+
+  if(xs.size() == ys.size())
+  {
+    while(a != nullptr)
+    {
+    if (*a != *b){
+      return false;
+    }
+    ++a;
+    ++b;
+  }
+  return true;
+  }
+return false;
+}
+
+template<typename T>
+bool operator !=(List<T> const& xs, List<T> const& ys)
+{
+  auto a = xs.begin();
+  auto b = ys.begin();
+
+  if(xs.size() == ys.size())
+  {
+    while(a != nullptr)
+    {
+    if (*a != *b){
+      return true;
+    }
+    ++a;
+    ++b;
+    }
+    return false;
+  }
+  return true;
+}
+
 
 template <typename T>
 class List
@@ -266,7 +309,7 @@ public:
     clear();
   }
 
-   ListIterator<T> begin()
+   ListIterator<T> begin() const
   {
     if(empty())
     {
@@ -278,7 +321,7 @@ public:
     }
   }
 
-  ListIterator<T> end()
+  ListIterator<T> end() const
   {
     if(empty())
     {
@@ -295,5 +338,7 @@ private:
   ListNode<T>* m_first = nullptr;
   ListNode<T>* m_last = nullptr;
 };
+
+
 
 # endif // # define BUW_LIST_HPP
