@@ -124,48 +124,6 @@ private:
   ListNode <T>* m_node = nullptr;
 };
 
-template<typename T>
-bool operator ==(List<T> const& xs, List<T> const& ys)
-{
-  auto a = xs.begin();
-  auto b = ys.begin();
-
-  if(xs.size() == ys.size())
-  {
-    while(a != nullptr)
-    {
-    if (*a != *b){
-      return false;
-    }
-    ++a;
-    ++b;
-  }
-  return true;
-  }
-return false;
-}
-
-template<typename T>
-bool operator !=(List<T> const& xs, List<T> const& ys)
-{
-  auto a = xs.begin();
-  auto b = ys.begin();
-
-  if(xs.size() == ys.size())
-  {
-    while(a != nullptr)
-    {
-    if (*a != *b){
-      return true;
-    }
-    ++a;
-    ++b;
-    }
-    return false;
-  }
-  return true;
-}
-
 
 template <typename T>
 class List
@@ -188,6 +146,16 @@ public:
     m_size{0},
     m_first{nullptr},
     m_last{nullptr} {}
+
+  List(List<T> const& list):
+      m_size{0},
+      m_first{nullptr},
+      m_last{nullptr}{
+      for(auto e = list.begin(); e != nullptr; ++e)
+      {
+        push_back(*e);
+      }
+      }
 
   bool empty() const
   {
@@ -338,6 +306,48 @@ private:
   ListNode<T>* m_first = nullptr;
   ListNode<T>* m_last = nullptr;
 };
+
+template<typename T>
+bool operator ==(List<T> const& xs, List<T> const& ys)
+{
+  auto a = xs.begin();
+  auto b = ys.begin();
+
+  if(xs.size() == ys.size())
+  {
+    while(a != nullptr)
+    {
+    if (*a != *b){
+      return false;
+    }
+    ++a;
+    ++b;
+  }
+  return true;
+  }
+return false;
+}
+
+template<typename T>
+bool operator !=(List<T> const& xs, List<T> const& ys)
+{
+  auto a = xs.begin();
+  auto b = ys.begin();
+
+  if(xs.size() == ys.size())
+  {
+    while(a != nullptr)
+    {
+    if (*a != *b){
+      return true;
+    }
+    ++a;
+    ++b;
+    }
+    return false;
+  }
+  return true;
+}
 
 
 

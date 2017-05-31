@@ -13,6 +13,24 @@ TEST_CASE("Default Constructor Liste", "[constructor]")
   REQUIRE(list.size() == 0);
 }
 
+TEST_CASE("Copy Constructor Liste", "[4.8 constructor]")
+{
+  List <int> list;
+  list.push_front(42);
+  list.push_back(9);
+
+  List<int> copiedList{list};
+  REQUIRE(copiedList.front() == 42);
+
+  List<int> list2;
+  list.push_front(1);
+  list.push_front(2);
+  list.push_front(3);
+  list.push_front(4);
+  List<int> list3{list};
+  REQUIRE (list2 == list3);
+}
+
 TEST_CASE ("add with push_front, delete with pop_front ", "[modifiers]")
 {
   List <int> list;
@@ -90,7 +108,9 @@ TEST_CASE ("Dereferenzierung", "[iterators]")
   auto e = list.end();
   REQUIRE(*b == 42);
   REQUIRE(*e == 12);
-  //Pfeiloperator??
+  // ListIterator<int> it{b};
+  // auto p = it -> m_next;
+  // REQUIRE(*p == 12);
 }
 
 TEST_CASE("Increment_Operators", "[iterators]")
@@ -180,6 +200,7 @@ TEST_CASE("compare lists", "[4.7]")
   list2.push_back(7);
   REQUIRE(list != list2);
 }
+
 
 
 
