@@ -49,6 +49,10 @@ struct ListIterator
   ListIterator(ListNode<T>* n):
     m_node{n} {}
 
+  void position(ListNode<T>){
+
+  }
+
   reference operator*() const {
     /*Dereferenzierung, Übergang von Zeiger auf Objekt;
     *gib also den Inhalt des Knotens zurück, auf den
@@ -62,34 +66,14 @@ struct ListIterator
   }
 
   Self& operator++() {
-    //Preincrement
-    //erhöht um eins und gibt zurück
-    // if(m_node->m_next == nullptr)
-    // {
-    //   std::cout << "This the last node, you can't go any further!";
-    //   return 0;
-    // }
-    // else
-    // {
       m_node = m_node -> m_next;
       return *this;
-    // }
   }
 
   Self operator++(int) {
-    //Postincrement
-    //erhoeht um 1, gibt alten Wert zurück
-    // if(m_node->m_next == nullptr)
-    // {
-    //   std::cout << "ERROR at Postincrement: \nThis is the last node, you can't go any further! \n";
-    //   return 0;
-    // }
-    // else
-    // {
       /*auto*/ListIterator old(*this); //Konstruktor!
       m_node = m_node -> m_next;
       return old;
-    // }
   }
 
   bool operator==(const Self& x) const {
@@ -198,20 +182,11 @@ public:
     {
       m_first = new ListNode<T>{v, nullptr, nullptr};
       m_last = m_first;
-
-      // ListNode<T> front{v, nullptr, nullptr};
-      // m_first = &front;
-      // m_last = m_first;
     }
     else
     {
       m_first = new ListNode<T>{v, nullptr, m_first};
       (*(*m_first).m_next).m_prev = m_first;
-
-      // ListNode<T> temp = *m_first;
-      // ListNode<T> front{v, nullptr, m_first};
-      // m_first = &front;
-      // temp.m_prev = m_first;
     }
     ++m_size;
   }
@@ -232,7 +207,6 @@ public:
       m_first = (*m_first).m_next;
       --m_size;
     }
-
   }
 
   T back()
@@ -276,6 +250,17 @@ public:
     }
   }
 
+  T valueAt(iterator const& p)
+  {
+    if (empty())
+    {
+      std::cout << "Sorry, but this list is empty";
+      return 0;
+    }
+    return p.m_node -> m_value;
+  }
+
+
   //Aufgabe 4.4
   void clear()
   {
@@ -283,8 +268,6 @@ public:
     {
       pop_front();
     }
-      // m_first = m_last = nullptr;
-      // m_size = 0;
   }
 
   //Destructor
@@ -294,7 +277,7 @@ public:
   }
 
   //Aufgabe 4.6
-  ListIterator<T> begin() const
+  ListIterator<T> begin() const //zeigt auf erstes Element
   {
     if(empty())
     {
@@ -306,11 +289,16 @@ public:
     }
   }
 
-  ListIterator<T> end() const
+  ListIterator<T> end() const //zeigt auf nullptr
+  {
+    return ListIterator<T>{};
+  }
+
+  ListIterator<T> last() const //zeigt auf letztes Element
   {
     if(empty())
     {
-      return ListIterator <T>{};
+      return ListIterator<T>{};
     }
     else
     {
@@ -331,6 +319,47 @@ public:
     {
       push_front(*e);
     }
+  }
+
+  void insert(iterator const& position, T const& value)
+  {
+    if(empty())
+    {
+      push_back(value);
+    }
+    else if(position == begin())
+    {
+      push_front(value);
+    }
+    else if(position == end())
+    {
+      push_back(value);
+    }
+    else
+    {
+      auto n = new ListNode<T>{value, position.m_node -> m_prev, position.m_node};
+      position.m_node -> m_prev -> m_next = n;
+      position.m_node -> m_prev = n;
+      ++m_size;
+    }
+  }
+
+  List& operator=(List<T> list) //ohne Referenz, sonst ist list nacher leer!
+  {
+    swap(list);
+    return *this;
+  }
+
+  void swap(List<T>& list)
+  {
+    std::swap(m_first, list.m_first);
+    std::swap(m_last, list.m_last);
+    std::swap(m_size, list.m_size);
+  }
+
+  friend void swap(List<T>& lhs, List<T>& rhs)
+  {
+    lhs.swap(rhs);
   }
 
 private:
@@ -391,7 +420,5 @@ List<T> reverse(List<T> const& list)
   }
   return reversedList;
 }
-
-
 
 # endif // # define BUW_LIST_HPP
