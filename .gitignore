@@ -20,7 +20,6 @@
 *.mod
 *.smod
 
-
 # Compiled Static libraries
 *.lai
 *.la
@@ -48,3 +47,4 @@ cmake_out
 
 # MacOS
 .DS_Store
+
