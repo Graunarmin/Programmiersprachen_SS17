@@ -1,5 +1,7 @@
-<<<<<<< HEAD
-# Programmiersprachen_SS17
+Programmiersprachen: helloworld
+===========
+
+Aufgabenblatt 1
 
 ```
 mkdir build
