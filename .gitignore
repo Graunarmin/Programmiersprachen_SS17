@@ -22,3 +22,5 @@
 
 build
 cmake_out
+
+.DS_Store
