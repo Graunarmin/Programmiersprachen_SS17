@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Programmiersprachen_SS17
 
 ```
